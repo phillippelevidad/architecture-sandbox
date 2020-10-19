@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package CatalogGrpc;
+
+message ListCatalogItemsRequest {
+    int32 startIndex = 1;
+    int32 pageSize = 2;
+}
+
+message ListCatalogItemsResponse {
+    int32 startIndex = 1;
+    int32 pageSize = 2;
+    int32 totalCount = 3;
+    repeated CatalogItem data = 4;
+}
+
+message CatalogItem {
+    int32 id = 1;
+    string name = 2;
+    double price = 3;
+}
+
+service Catalog {
+    rpc ListCatalogItems (ListCatalogItemsRequest) returns (ListCatalogItemsResponse) { }
+}
