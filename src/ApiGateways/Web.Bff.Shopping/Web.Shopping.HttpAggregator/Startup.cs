@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,11 +23,10 @@ namespace Web.Shopping.HttpAggregator
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<UrlsConfig>(Configuration.GetSection("Urls"));
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddHttpServices();
-
-            services.Configure<UrlsConfig>(Configuration.GetSection("Urls"));
 
             services.AddSwaggerGen(options =>
             {
@@ -34,6 +34,15 @@ namespace Web.Shopping.HttpAggregator
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowCredentials());
             });
         }
 

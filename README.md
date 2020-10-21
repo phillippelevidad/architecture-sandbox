@@ -1,4 +1,4 @@
-# Web.Shopping.HttpAggregator
+# Ideia no Ar Marketplace - V2 Sandbox
 
 ## Performance
 
@@ -13,5 +13,7 @@
 ## Roadmap
 
 * Authenticate API calls with an Identity Server
-* Dockerize everything under Compose
-* Promote discoverability with a centralized manager service# architecture-sandbox
+* Dockerize everything
+* Promote discoverability with a centralized manager service
+* Add a secrets storage service
+* Add health checks

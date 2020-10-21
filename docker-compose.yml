@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  web.shopping.httpaggregator:
+    image: ${DOCKER_REGISTRY-}webshoppinghttpaggregator
+    build:
+      context: .
+      dockerfile: src/ApiGateways/Web.Bff.Shopping/Web.Shopping.HttpAggregator/Dockerfile
+
+  catalog.grpc:
+    image: ${DOCKER_REGISTRY-}cataloggrpc
+    build:
+      context: .
+      dockerfile: src/Services/Catalog/Catalog.Grpc/Dockerfile
